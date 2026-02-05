@@ -61,14 +61,18 @@ function App() {
   }
 
   const handleNoHoverOrClick = () => {
-    // Move the "No" button gently within a tight central area
-    const deltaX = (Math.random() - 0.5) * 30 // -15 to +15
-    const deltaY = (Math.random() - 0.5) * 20 // -10 to +10
+    // Move the "No" button smoothly to a new random spot
+    // but keep it inside a safe central box so it never gets cut off,
+    // on both desktop and mobile.
+    const deltaX = (Math.random() - 0.5) * 40 // -20 to +20
+    const deltaY = (Math.random() - 0.5) * 30 // -15 to +15
     let nextX = noPos.x + deltaX
     let nextY = noPos.y + deltaY
-    // keep inside a small central box so it never reaches the edges
-    nextX = Math.min(65, Math.max(35, nextX))
-    nextY = Math.min(65, Math.max(35, nextY))
+
+    // clamp to a central area within the container
+    nextX = Math.min(75, Math.max(25, nextX))
+    nextY = Math.min(70, Math.max(30, nextY))
+
     setNoPos({ x: nextX, y: nextY })
   }
 
